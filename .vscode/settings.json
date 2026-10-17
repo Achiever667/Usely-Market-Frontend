@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd \"c:\\\\Users\\\\Lenovo 6th gen\\\\Documents\\\\Usely\\\\usely-market-frontend\" ; if \\[ -d \"src/app/\\(admin\\)/admin\" \\] ; \\[ ! -d \"src/app/\\(admin\\)/dashboard\" \\]; then mkdir -p \"src/app/\\(admin\\)/dashboard\" ; mv \"src/app/\\(admin\\)/admin/page\\.tsx\" \"src/app/\\(admin\\)/dashboard/page\\.tsx\"; fi$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

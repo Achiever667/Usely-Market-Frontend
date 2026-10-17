@@ -1,0 +1,392 @@
+/* Fonts are loaded via next/font/google in src/app/layout.tsx.
+   CSS variables --font-barlow and --font-poppins are injected on <html>. */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* Barlow — heading / display font (h1–h6) */
+  --font-barlow: "Barlow", sans-serif;
+  /* Poppins — body / sans font (paragraphs, descriptions, UI labels) */
+  --font-poppins: "Poppins", sans-serif;
+
+  /* =========================================================
+     PRIMARY SYSTEM
+  ========================================================= */
+  --color-*: initial;
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+
+  /* =========================================================
+     NEUTRAL SYSTEM
+  ========================================================= */
+
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  /* =========================================================
+     SUCCESS
+  ========================================================= */
+
+  --color-success-50: #ecfdf5;
+  --color-success-100: #d1fae5;
+  --color-success-200: #a7f3d0;
+  --color-success-300: #6ee7b7;
+  --color-success-400: #34d399;
+  --color-success-500: #10b981;
+  --color-success-600: #059669;
+  --color-success-700: #047857;
+  --color-success-800: #065f46;
+  --color-success-900: #064e3b;
+
+  /* =========================================================
+     WARNING
+  ========================================================= */
+
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+
+  /* =========================================================
+     DANGER
+  ========================================================= */
+
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
+  --color-danger-200: #fecaca;
+  --color-danger-300: #fca5a5;
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+  --color-danger-700: #b91c1c;
+  --color-danger-800: #991b1b;
+  --color-danger-900: #7f1d1d;
+
+  /* =========================================================
+     INFO
+  ========================================================= */
+
+  --color-info-50: #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-200: #bfdbfe;
+  --color-info-300: #93c5fd;
+  --color-info-400: #60a5fa;
+  --color-info-500: #3b82f6;
+  --color-info-600: #2563eb;
+  --color-info-700: #1d4ed8;
+  --color-info-800: #1e40af;
+  --color-info-900: #1e3a8a;
+
+  --color-white: var(--color-neutral-0);
+  --color-black: var(--color-neutral-900);
+
+  /* =========================================================
+     TYPOGRAPHY SCALE
+  ========================================================= */
+  --text-*: initial;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.125rem;
+
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.5rem;
+
+  --text-subtitle: 1rem;
+  --text-subtitle--line-height: 1.625rem;
+
+  --text-title: 1.125rem;
+  --text-title--line-height: 1.75rem;
+
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 2rem;
+
+  --text-h2: 2rem;
+  --text-h2--line-height: 2.5rem;
+
+  --text-h1: 3rem;
+  --text-h1--line-height: 1.1;
+
+  /* =========================================================
+     FONT WEIGHT
+  ========================================================= */
+  --font-*: initial;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 700;
+}
+
+:root {
+  --rounded: 0.75rem;
+
+  --background: var(--color-neutral-0);
+  --foreground: var(--color-neutral-900);
+
+  --card: var(--color-neutral-0);
+  --card-foreground: var(--color-neutral-900);
+
+  --popover: var(--color-neutral-0);
+  --popover-foreground: var(--color-neutral-900);
+
+  --primary: var(--color-primary-600);
+  --primary-foreground: var(--color-neutral-0);
+
+  --secondary: var(--color-neutral-100);
+  --secondary-foreground: var(--color-neutral-900);
+
+  --muted: var(--color-neutral-100);
+  --muted-foreground: var(--color-neutral-500);
+
+  --accent: var(--color-primary-50);
+  --accent-foreground: var(--color-primary-700);
+
+  --success: var(--color-success-500);
+  --warning: var(--color-warning-500);
+  --destructive: var(--color-danger-500);
+  --info: var(--color-info-500);
+
+  --border: var(--color-neutral-200);
+  --input: var(--color-neutral-200);
+  --ring: var(--color-primary-400);
+
+  --shadow-xs-value: 0 1px 2px rgb(0 0 0 / 0.05);
+
+  --shadow-sm-value: 0 1px 3px rgb(0 0 0 / 0.1), 0 1px 2px rgb(0 0 0 / 0.06);
+
+  --shadow-md-value: 0 4px 6px rgb(0 0 0 / 0.07), 0 2px 4px rgb(0 0 0 / 0.06);
+
+  --shadow-lg-value: 0 10px 15px rgb(0 0 0 / 0.1), 0 4px 6px rgb(0 0 0 / 0.05);
+
+  /* Sidebar — slightly off-white so it reads as a distinct surface */
+  --sidebar: var(--color-neutral-50);
+  --sidebar-foreground: var(--color-neutral-900);
+}
+
+.dark {
+  --background: var(--color-neutral-950);
+  --foreground: var(--color-neutral-50);
+
+  --card: var(--color-neutral-900);
+  --card-foreground: var(--color-neutral-50);
+
+  --popover: var(--color-neutral-900);
+  --popover-foreground: var(--color-neutral-50);
+
+  --primary: var(--color-primary-400);
+  --primary-foreground: var(--color-neutral-950);
+
+  --secondary: var(--color-neutral-800);
+  --secondary-foreground: var(--color-neutral-50);
+
+  --muted: var(--color-neutral-800);
+  --muted-foreground: var(--color-neutral-400);
+
+  --accent: var(--color-primary-900);
+  --accent-foreground: var(--color-primary-100);
+
+  --border: rgb(255 255 255 / 0.1);
+  --input: rgb(255 255 255 / 0.12);
+  --ring: var(--color-primary-500);
+
+  --sidebar: var(--color-neutral-900);
+  --sidebar-foreground: var(--color-neutral-50);
+}
+
+@theme inline {
+  /* =========================================================
+     COLORS
+  ========================================================= */
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+
+  /* =========================================================
+     TYPOGRAPHY
+  ========================================================= */
+
+  /* Barlow → headings (h1–h6, bold display text)
+     Poppins → body / sans (paragraphs, descriptions, UI labels) */
+  --font-sans: var(--font-poppins);
+  --font-heading: var(--font-barlow);
+
+  --text-xs: var(--text-xs);
+  --text-xs--line-height: var(--text-xs--line-height);
+
+  --text-caption: var(--text-caption);
+  --text-caption--line-height: var(--text-caption--line-height);
+
+  --text-body: var(--text-body);
+  --text-body--line-height: var(--text-body--line-height);
+
+  --text-subtitle: var(--text-subtitle);
+  --text-subtitle--line-height: var(--text-subtitle--line-height);
+
+  --text-title: var(--text-title);
+  --text-title--line-height: var(--text-title--line-height);
+
+  --text-h3: var(--text-h3);
+  --text-h3--line-height: var(--text-h3--line-height);
+
+  --text-h2: var(--text-h2);
+  --text-h2--line-height: var(--text-h2--line-height);
+
+  --text-h1: var(--text-h1);
+  --text-h1--line-height: var(--text-h1--line-height);
+
+  --font-regular: var(--font-weight-regular);
+  --font-medium: var(--font-weight-medium);
+  --font-bold: var(--font-weight-bold);
+
+  /* =========================================================
+     RADIUS
+  ========================================================= */
+
+  --rounded-sm: calc(var(--rounded) - 4px);
+  --rounded-md: calc(var(--rounded) - 2px);
+  --rounded-lg: var(--rounded);
+  --rounded-xl: calc(var(--rounded) + 4px);
+
+  /* =========================================================
+     SHADOWS
+  ========================================================= */
+
+  --shadow-xs: var(--shadow-xs-value);
+  --shadow-sm: var(--shadow-sm-value);
+  --shadow-md: var(--shadow-md-value);
+  --shadow-lg: var(--shadow-lg-value);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply h-full scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-body font-regular text-foreground min-h-full font-sans antialiased;
+
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
+  h1 {
+    @apply font-heading text-h1 font-bold;
+  }
+
+  h2 {
+    @apply font-heading text-h2 font-bold;
+  }
+
+  h3 {
+    @apply font-heading text-h3 font-bold;
+  }
+
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-title font-medium;
+  }
+
+  /* Paragraphs, descriptions, captions — always Poppins */
+  p,
+  span,
+  li,
+  label,
+  caption,
+  figcaption,
+  blockquote {
+    font-family: var(--font-poppins);
+  }
+}
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(212 212 212 / 0.5) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: rgb(212 212 212 / 0.5);
+    border-radius: 999px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgb(163 163 163 / 0.7);
+  }
+
+  .dark *::-webkit-scrollbar-thumb {
+    background: rgb(82 82 82 / 0.6);
+  }
+
+  .dark *::-webkit-scrollbar-thumb:hover {
+    background: rgb(115 115 115 / 0.8);
+  }
+}
