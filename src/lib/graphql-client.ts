@@ -88,6 +88,14 @@ async function refreshAccessToken() {
   return data.refresh.accessToken;
 }
 
+async function execute<TData>(
+  document: RequestDocument,
+  variables: Variables | undefined,
+  headers: Headers,
+): Promise<TData> {
+  return graphqlClient.request<TData>(document, variables, headers);
+}
+
 export async function graphqlRequest<TData, TVariables extends Variables = Variables>(
   document: RequestDocument,
   variables?: TVariables,
@@ -101,7 +109,7 @@ export async function graphqlRequest<TData, TVariables extends Variables = Varia
   }
 
   try {
-    return await graphqlClient.request<TData, TVariables>(document, variables as TVariables, headers);
+    return await execute<TData>(document, variables, headers);
   } catch (error) {
     if (!options.skipAuthRetry && isUnauthorized(error)) {
       try {
@@ -109,7 +117,7 @@ export async function graphqlRequest<TData, TVariables extends Variables = Varia
         if (refreshedToken) {
           const retryHeaders = new Headers(options.headers);
           retryHeaders.set("authorization", `Bearer ${refreshedToken}`);
-          return await graphqlClient.request<TData, TVariables>(document, variables as TVariables, retryHeaders);
+          return await execute<TData>(document, variables, retryHeaders);
         }
       } catch (refreshError) {
         logger.warn("Unable to refresh access token.", { refreshError });

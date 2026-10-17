@@ -3,8 +3,9 @@
 import * as React from "react";
 import { UiCard, UiCardContent, UiCardHeader, UiCardTitle } from "@/components/ui/card";
 import { LineChartWrapper } from "@/components/dashboard/charts/LineChartWrapper";
+import type { LineChartWrapperProps } from "@/components/dashboard/charts/LineChartWrapper";
 
-export function UserGrowth({ data = [] }: { data?: unknown[] }) {
+export function UserGrowth({ data = [] }: { data?: LineChartWrapperProps["data"] }) {
   return (
     <UiCard className="p-4 rounded-2xl shadow-sm">
       <UiCardHeader className="p-0">
