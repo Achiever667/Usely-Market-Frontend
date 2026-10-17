@@ -13,18 +13,7 @@ import {
 } from "@/components/dashboard/layout";
 
 // New sidebar primitives
-import {
-  Sidebar,
-  SidebarHeader,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuCollapsible,
-  SidebarMenuSub,
-  SidebarSeparator,
-} from "@/components/dashboard/sidebar";
+import { AdminSidebar } from "@/components/dashboard/AdminSidebar";
 
 // Dashboard widgets
 import { StatsCard } from "@/components/dashboard/cards/StatsCard";
@@ -76,106 +65,7 @@ const NAV_SYSTEM = [
    Sidebar nav component
 ───────────────────────────────────────────────────────────────────────────── */
 
-function AdminSidebar() {
-  return (
-    <Sidebar>
-      {/* Brand */}
-      <SidebarHeader>
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="relative size-9 shrink-0 overflow-hidden rounded-xl ring-1 ring-border/40">
-            <Image
-              src="/images/logo.png"
-              alt="Usely"
-              fill
-              className="object-contain"
-            />
-          </div>
-          <div className="min-w-0">
-            <div className="truncate text-sm font-bold text-foreground leading-tight">
-              Usely Market
-            </div>
-            <div className="truncate text-[11px] font-medium text-muted-foreground">
-              Admin Console
-            </div>
-          </div>
-        </div>
-      </SidebarHeader>
-
-      {/* Navigation */}
-      <SidebarContent>
-        <SidebarGroup label="Main">
-          <SidebarMenu>
-            {NAV_MAIN.map((item) =>
-              item.children ? (
-                <SidebarMenuCollapsible
-                  key={item.label}
-                  icon={item.icon}
-                  label={item.label}
-                >
-                  {item.children.map((child) => (
-                    <SidebarMenuSub key={child.label} href={child.href}>
-                      {child.label}
-                    </SidebarMenuSub>
-                  ))}
-                </SidebarMenuCollapsible>
-              ) : (
-                <SidebarMenuItem
-                  key={item.label}
-                  icon={item.icon}
-                  label={item.label}
-                  href={item.href}
-                  active={item.active}
-                  badge={item.badge}
-                />
-              )
-            )}
-          </SidebarMenu>
-        </SidebarGroup>
-
-        <SidebarSeparator />
-
-        <SidebarGroup label="System">
-          <SidebarMenu>
-            {NAV_SYSTEM.map((item) => (
-              <SidebarMenuItem
-                key={item.label}
-                icon={item.icon}
-                label={item.label}
-                href={item.href}
-              />
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
-      </SidebarContent>
-
-      {/* User footer */}
-      <SidebarFooter>
-        <div className="flex items-center gap-3">
-          <div className="relative size-9 shrink-0 overflow-hidden rounded-full ring-1 ring-border/40">
-            <Image
-              src="/images/auth/logo.png"
-              alt="avatar"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="truncate text-sm font-semibold leading-tight">Admin User</div>
-            <div className="truncate text-[11px] text-muted-foreground">admin@usely.com</div>
-          </div>
-          <UiButton
-            variant="ghost"
-            size="icon"
-            aria-label="Sign out"
-            className="size-8 shrink-0"
-          >
-            <UiIcon name="log-out" size={15} />
-          </UiButton>
-        </div>
-      </SidebarFooter>
-    </Sidebar>
-  );
-}
+// AdminSidebar moved to components/dashboard/AdminSidebar.tsx
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Topbar actions
@@ -251,67 +141,42 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <DashboardShell>
-      {/* Flex row: sidebar (animated) + main column */}
-      <div className="flex min-h-dvh">
-        <AdminSidebar />
+    <>
+      <DashboardTopbar title="Admin Console" subtitle="Overview & metrics" actions={<TopbarActions />} />
 
-        <DashboardMain>
-          <DashboardTopbar
-            title="Admin Console"
-            subtitle="Overview & metrics"
-            actions={<TopbarActions />}
-          />
+      <DashboardContent>
+        <DashboardPageHeader title="Overview" description="Here's what's happening with your store today." actions={<QuickActions />} />
 
-          <DashboardContent>
-            <DashboardPageHeader
-              title="Overview"
-              description="Here's what's happening with your store today."
-              actions={<QuickActions />}
-            />
+        {/* Stats row */}
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-6">
+          {stats.map((s) => (
+            <StatsCard key={s.id} title={s.title} value={s.value} delta={s.delta} icon={s.icon} />
+          ))}
+        </div>
 
-            {/* Stats row */}
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-6">
-              {stats.map((s) => (
-                <StatsCard
-                  key={s.id}
-                  title={s.title}
-                  value={s.value}
-                  delta={s.delta}
-                  icon={s.icon}
-                />
-              ))}
-            </div>
+        {/* Charts + side widgets */}
+        <div className="grid gap-6 lg:grid-cols-12 mb-6">
+          <div className="lg:col-span-8 space-y-6">
+            <RevenueOverview />
+            <AnalyticsCard title="Traffic" />
+          </div>
+          <div className="lg:col-span-4 space-y-4">
+            <TopProducts products={products} />
+            <SystemHealth />
+          </div>
+        </div>
 
-            {/* Charts + side widgets */}
-            <div className="grid gap-6 lg:grid-cols-12 mb-6">
-              <div className="lg:col-span-8 space-y-6">
-                <RevenueOverview />
-                <AnalyticsCard title="Traffic" />
-              </div>
-              <div className="lg:col-span-4 space-y-4">
-                <TopProducts products={products} />
-                <SystemHealth />
-              </div>
-            </div>
-
-            {/* Table + recent activity */}
-            <div className="grid gap-6 lg:grid-cols-12">
-              <div className="lg:col-span-8">
-                <DashboardTable
-                  title="Recent Orders"
-                  columns={tableCols}
-                  data={tableData}
-                />
-              </div>
-              <div className="lg:col-span-4 space-y-4">
-                <RecentActivities activities={activities} />
-                <QuickActions />
-              </div>
-            </div>
-          </DashboardContent>
-        </DashboardMain>
-      </div>
-    </DashboardShell>
+        {/* Table + recent activity */}
+        <div className="grid gap-6 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <DashboardTable title="Recent Orders" columns={tableCols} data={tableData} />
+          </div>
+          <div className="lg:col-span-4 space-y-4">
+            <RecentActivities activities={activities} />
+            <QuickActions />
+          </div>
+        </div>
+      </DashboardContent>
+    </>
   );
 }
